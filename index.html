@@ -74,13 +74,13 @@ footer{color:var(--dim);text-align:center;padding:0 22px 50px;font-size:12px}
 
   <div class="card five">
     <b>Song #2 — $5</b>
-    <div class="note">Payment link goes here (Stripe Payment Link A).</div>
-    <a class="cta secondary" id="link5" href="#" hidden>Pay $5 and forge it</a>
+    <div class="note">Live payment link — card, Apple Pay, Link.</div>
+    <a class="cta secondary" id="link5" href="https://buy.stripe.com/6oU5kE4LT9Md16lbzu14402">Pay $5 and forge it</a>
   </div>
   <div class="card three">
     <b>Song #3 — $3</b>
-    <div class="note">Payment link goes here (Stripe Payment Link B).</div>
-    <a class="cta secondary" id="link3" href="#" hidden>Pay $3 and forge it</a>
+    <div class="note">Live payment link — repeat-customer price.</div>
+    <a class="cta secondary" id="link3" href="https://buy.stripe.com/6oU5kE4LT9Md16lbzu14402">Pay $3 and forge it</a>
   </div>
 </main>
 <footer>AnthemSmith · anthemsmith.com · every song carries a heart anchor: one real line from your actual people.<br>
@@ -111,7 +111,7 @@ document.getElementById('go').onclick = () => {
   location.href = 'thankyou.html?' + p.toString();
 };
 // pricing links are injected by the build once Stripe links exist
-const LINKS = { five: '', three: '' };
+const LINKS = { five: 'https://buy.stripe.com/6oU5kE4LT9Md16lbzu14402', three: 'https://buy.stripe.com/00w9AUbah8I9cP38ni14403' };
 if (LINKS.five) { const a=document.getElementById('link5'); a.href=LINKS.five; a.hidden=false; }
 if (LINKS.three) { const a=document.getElementById('link3'); a.href=LINKS.three; a.hidden=false; }
 </script></body></html>
