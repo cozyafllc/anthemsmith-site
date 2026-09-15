@@ -50,6 +50,10 @@ footer{color:var(--dim);text-align:center;padding:0 22px 50px;font-size:12px}
       <div><label for="ig">Instagram (1 or 2)</label>
         <input id="ig" placeholder="@theprinceofybor, @secondhandle"></div>
     </div>
+    <label for="sp">Spotify playlist (optional — we average the vibe)</label>
+    <input id="sp" placeholder="https://open.spotify.com/playlist/...">
+    <div class="note">Private Instagram? Tick a follow request from your phone — once you accept, we read the whole vibe
+    (captions, comments, the inside jokes). No vendor can read a private account; we use our own follow, only after you accept.</div>
     <label>Mood</label>
     <div class="moods" id="moods">
       <button class="mood" aria-pressed="true" data-g="Love" data-m="in love">Love · in love</button>
@@ -93,9 +97,18 @@ document.getElementById('go').onclick = () => {
         email = document.getElementById('email').value.trim(),
         mood = document.querySelector('.mood[aria-pressed="true"]');
   if (!artist || !ig || !email) { st.textContent = 'Need the artist+song, an Instagram, and your email.'; return; }
-  st.textContent = 'Queued: ' + artist + ' · ' + mood.dataset.g + ' / ' + mood.dataset.m + ' · @' + ig.replace('@','') +
-                   ' — first song free. We email ' + email + ' when it is forged (about 3 minutes).';
-  // TODO: POST to the order endpoint (Supabase edge function / runner). Free tier = no charge.
+  const sp = document.getElementById('sp').value.trim();
+  st.textContent = 'Forging… taking you to your order page.';
+  const p = new URLSearchParams({
+    artist: artist,
+    ig: ig.replace(/@/g,''),
+    email: email,
+    voice: document.getElementById('voice').value,
+    group: mood.dataset.g,
+    mood: mood.dataset.m,
+    sp: sp
+  });
+  location.href = 'thankyou.html?' + p.toString();
 };
 // pricing links are injected by the build once Stripe links exist
 const LINKS = { five: '', three: '' };
